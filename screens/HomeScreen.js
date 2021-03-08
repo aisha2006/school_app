@@ -1,21 +1,39 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import {Header} from 'react-native-elements';
 
 export default class HomeScreen extends React.Component{
     render(){
         return(
             <View style = {styles.container}>
-                <Header            
-                 centerComponent={{text: "Home", 
-                 style: {
-                    fontSize: 65,
-                    fontWeight: "bold",
-                    paddingBottom: 30,
-                    color: "white"}
-                }}
-                
-                />
+                <View>
+                    <Header            
+                    centerComponent={{text: "Home", 
+                    style: {
+                        fontSize: 65,
+                        fontWeight: "bold",
+                        paddingBottom: 30,
+                        color: "white"}
+                    }}/>
+                </View>
+
+                <View>
+                    <TouchableOpacity>
+                        <Text>
+                            Assignments
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>
+                            Progress
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text>
+                           My Notfication
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }

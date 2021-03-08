@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity, TextInput, Alert } from 'react-native';
 import firebase from "firebase";
+import db from "../config"
+
 export default class WelcomeScreen extends React.Component{
     constructor(){
         super();
@@ -14,13 +16,14 @@ export default class WelcomeScreen extends React.Component{
     userLogin=(email,password)=>{
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
-            this.props.navigation.navigate('HomeScreen');
-        })
+            this.props.navigation.navigate("HomeScreen");
+        }
+            )
         .catch((error)=>{
             var errorCode = error.code;
             var errorMessage = error.message;
             return Alert.alert(errorMessage);
-        })
+         })
     }
 
     render(){
