@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View,TouchableOpacity,FlatList } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity,FlatList , Button} from 'react-native';
 import { ListItem } from 'react-native-elements'
 import firebase from 'firebase';
 import db from '../config'
@@ -10,10 +10,11 @@ export default class AssignmentScreen extends React.Component{
         this.state={
             assignmentsList:[]
         }
+        this.assignmentRef = null;
     }
     
-  getAssignmentsList =()=>{
-    this.assignment = db.collection("Assignments")
+  getAssignmentsList=()=>{
+    this.assignmentRef = db.collection("Assignments")
     .onSnapshot((snapshot)=>{
       var assignmentsList = snapshot.docs.map((doc) => doc.data())
       this.setState({
@@ -24,24 +25,37 @@ export default class AssignmentScreen extends React.Component{
 
   componentDidMount(){
     this.getAssignmentsList()
+    //console.log(this.state.assignmentsList);
+  }
+  
+  componentWillUnmount(){
+    this.assignmentRef();
   }
 
   keyExtractor = (item, index) => index.toString()
 
   renderItem = ( {item, i} ) =>{
-    return (
-      <ListItem
-        key={i}
-        title={item.topic}
-        subtitle={item.instructions}
-        titleStyle={{ color: 'black', fontWeight: 'bold' }}
-        rightElement={
-            <TouchableOpacity>
-              <Text style={{color:'#ffff'}}>View</Text>
-            </TouchableOpacity>
-          }
-        bottomDivider
-      />
+    return(
+      // <ListItem
+      //   key={i}
+      //   title={item.topic}
+      //   subtitle={item.instructions}
+      //   titleStyle={{ color: 'black', fontWeight: 'bold' }}
+      //   rightElement={  
+      //         <Text style={{color:'red'}}>View</Text>
+            
+      //     }
+      //   bottomDivider
+      // />
+      <View>
+        <Text>{item.topic}</Text>
+        <Text>{item.instructions}</Text>
+        <Text>{item.submission_date}</Text>
+        <Button
+        title={"View"}
+        />
+      </View>
+      
     )
   }
 
@@ -55,13 +69,27 @@ export default class AssignmentScreen extends React.Component{
                             back
                         </Text>
                     </TouchableOpacity>
-                    <View>
-                    <FlatList
+                 
+
+                      {
+                        this.state.assignmentsList.length === 0? (
+                          <View>
+                            <Text>No assignments</Text>
+                          </View>
+                        ) : (
+                          <View>
+                        <FlatList
                         keyExtractor={this.keyExtractor}
-                        data={this.state.requestedBooksList}
+                        data={this.state.assignmentsList}
                         renderItem={this.renderItem}
-              />
-                    </View>
+                      />
+                      <View>
+                      <Text>test</Text>
+                      </View>
+                      </View>
+                        )
+                      }
+                    
             </View>
         );
     }

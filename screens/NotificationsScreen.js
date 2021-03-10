@@ -1,7 +1,68 @@
 import React from 'react';
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,TouchableOpacity,FlatList, Button } from 'react-native';
+import db from "../config";
 
 export default class NotificationsScreen extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            notificationList:[]
+        }
+        this.notificationRef = null;
+    }
+   
+    getNotifications = ()=>{
+        this.notificationRef = db.collection("Notifications")
+        .where("status","==","unread")
+        .onSnapshot((doc)=>{
+            var notifications=[];
+           doc.docs.map((data)=>{
+               var notification = data.data();
+               notifications.push(notification)
+           })
+           this.setState({
+               notificationList:notifications
+           })
+            
+        })
+    }
+   
+    componentDidMount(){
+        this.getNotifications();
+    }
+
+    componentWillUnmount(){
+        this.notificationRef();
+    }
+
+    keyExtractor = (item, index) => index.toString()
+
+    renderItem = ( {item, i} ) =>{
+      return(
+        // <ListItem
+        //   key={i}
+        //   title={item.topic}
+        //   subtitle={item.instructions}
+        //   titleStyle={{ color: 'black', fontWeight: 'bold' }}
+        //   rightElement={  
+        //         <Text style={{color:'red'}}>View</Text>
+              
+        //     }
+        //   bottomDivider
+        // />
+        <View>
+          <Text>{item.title}</Text>
+          <Text>{item.message}</Text>
+          <Text>{item.date}</Text>
+          <Button
+          title={"View"}
+          />
+        </View>
+        
+      )
+    }
+   
+   
     render(){
         return(
             <View style={styles.container}>
@@ -12,6 +73,26 @@ export default class NotificationsScreen extends React.Component{
                             back
                         </Text>
                     </TouchableOpacity>
+
+                    <View>
+                        { 
+                        this.state.notificationList.length === 0? (
+                          <View>
+                            <Text>No notifications</Text>
+                          </View>
+                        ) : (
+                          <View>
+                        <FlatList
+                        keyExtractor={this.keyExtractor}
+                        data={this.state.notificationList}
+                        renderItem={this.renderItem}
+                      />
+
+                      </View>
+                        )
+                      }
+                    
+                    </View>
             </View>
         );
     }

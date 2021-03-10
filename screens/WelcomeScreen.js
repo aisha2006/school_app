@@ -13,18 +13,18 @@ export default class WelcomeScreen extends React.Component{
     }
 
 
-    // userLogin=(email,password)=>{
-    //     firebase.auth().signInWithEmailAndPassword(email,password)
-    //     .then(()=>{
-    //         this.props.navigation.navigate("HomeScreen");
-    //     }
-    //         )
-    //     .catch((error)=>{
-    //         var errorCode = error.code;
-    //         var errorMessage = error.message;
-    //         return Alert.alert(errorMessage);
-    //      })
-    // }
+    userLogin=(email,password)=>{
+        firebase.auth().signInWithEmailAndPassword(email,password)
+        .then(()=>{
+            this.props.navigation.navigate("HomeScreen");
+        }
+            )
+        .catch((error)=>{
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            return Alert.alert(errorMessage);
+         })
+    }
 
     TeacherLogin=(email,password)=>{
         firebase.auth().signInWithEmailAndPassword(email,password)
@@ -66,7 +66,7 @@ export default class WelcomeScreen extends React.Component{
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={()=>{ this.props.navigation.navigate("HomeScreen");}}>
+                    onPress={()=>{this.userLogin(this.state.emailId,this.state.password);}}>
                     <Text> student Login</Text>
                 </TouchableOpacity>
             </View>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderRadius: 20,
         backgroundColor: "#a7d1a1",
-        shadowColorr: "#000",
+        shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 8
