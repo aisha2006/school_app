@@ -13,10 +13,23 @@ export default class WelcomeScreen extends React.Component{
     }
 
 
-    userLogin=(email,password)=>{
+    // userLogin=(email,password)=>{
+    //     firebase.auth().signInWithEmailAndPassword(email,password)
+    //     .then(()=>{
+    //         this.props.navigation.navigate("HomeScreen");
+    //     }
+    //         )
+    //     .catch((error)=>{
+    //         var errorCode = error.code;
+    //         var errorMessage = error.message;
+    //         return Alert.alert(errorMessage);
+    //      })
+    // }
+
+    TeacherLogin=(email,password)=>{
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then(()=>{
-            this.props.navigation.navigate("HomeScreen");
+            this.props.navigation.navigate("TeacherHomeScreen");
         }
             )
         .catch((error)=>{
@@ -53,11 +66,35 @@ export default class WelcomeScreen extends React.Component{
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={()=>{this.userLogin(this.state.emailId,this.state.password)}}>
-                    <Text>Login</Text>
+                    onPress={()=>{ this.props.navigation.navigate("HomeScreen");}}>
+                    <Text> student Login</Text>
                 </TouchableOpacity>
             </View>
+
+            <View>
+
+                <TextInput
+                style={styles.loginBox}
+                keyboardType="email-address"
+                placeholder="abc@mail.com"
+                onChangeText={(email)=>{this.setState({emailId:email})}}
+                />
+
+                <TextInput
+                style={styles.loginBox}
+                secureTextEntry={true}
+                placeholder="enter password"
+                placeholderTextColor= "gray"
+                onChangeText={(password)=>{this.setState({password:password})}}
+                />
+
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={()=>{this.TeacherLogin(this.state.emailId,this.state.password)}}>
+                    <Text> teacher Login</Text>
+                </TouchableOpacity>
             </View>
+          </View>
         );
     }
 }

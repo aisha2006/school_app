@@ -2,19 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 
-export default class HomeScreen extends React.Component{
+export default class TeacherHomeScreen extends React.Component{
     render(){
         return(
             <View style = {styles.container}>
                    <Text style={styles.title}>Home Screen</Text>
 
                 <View>
-                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Assignments")}}>
+                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("GiveAssignments")}}>
                         <Text>
                             Assignments
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Progress")}}>
+                    {/* <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Progress")}}>
                         <Text>
                             Progress
                         </Text>
@@ -23,7 +23,7 @@ export default class HomeScreen extends React.Component{
                         <Text>
                            My Notfications
                         </Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </View>
         );
