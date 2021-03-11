@@ -42,9 +42,7 @@ export default class WelcomeScreen extends React.Component{
      return(
         <View style={styles.container}>
             <View>
-                 {/* <Header
-                centerComponent={"Welcome!"}
-                />    */}
+                <Text style={styles.title}>Welcome Screen</Text>
             </View>
             <View>
 

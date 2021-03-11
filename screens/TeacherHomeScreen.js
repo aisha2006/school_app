@@ -14,16 +14,16 @@ export default class TeacherHomeScreen extends React.Component{
                             Assignments
                         </Text>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Progress")}}>
+                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("GiveProgress")}}>
                         <Text>
                             Progress
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Notifications")}}>
+                    {/* <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Notifications")}}>
                         <Text>
                            My Notfications
                         </Text>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity> */} 
                 </View>
             </View>
         );

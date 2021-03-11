@@ -10,6 +10,8 @@ import TeacherHomeScreen from "./screens/TeacherHomeScreen";
 import GiveAssignmentsScreen from "./screens/GiveAssignmentsScreen"
 import HomeworkForm from "./screens/HomeworkForm";
 import getAssignmentsDetails from "./screens/GetAssignmentDetails"
+import GiveProgressScreen from "./screens/GiveProgressScreen";
+import ProgressForm from "./screens/ProgressForm"
 
 export default class App extends React.Component {
   render(){
@@ -30,6 +32,8 @@ export default class App extends React.Component {
    TeacherHomeScreen:{screen:TeacherHomeScreen},
    GiveAssignments:{screen:GiveAssignmentsScreen},
    HomeworkForm:{screen:HomeworkForm},
+   GiveProgress:{screen:GiveProgressScreen},
+   ProgressForm:{screen:ProgressForm}
  // AssignmentsDetails:{screen:getAssignmentsDetails}
 //   Drawer: {screen: AppDrawerNavigator},
 //   BottomTab: {screen: AppTabNavigator}
