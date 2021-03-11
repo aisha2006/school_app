@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity, TextInput, Alert } from 'react-native';
 import firebase from "firebase";
-import db from "../config"
-
+import db from "../config"; 
 export default class WelcomeScreen extends React.Component{
     constructor(){
         super();
@@ -43,9 +42,9 @@ export default class WelcomeScreen extends React.Component{
      return(
         <View style={styles.container}>
             <View>
-                <Text style={styles.title}>
-                    Welcome Screen
-                </Text>  
+                 {/* <Header
+                centerComponent={"Welcome!"}
+                />    */}
             </View>
             <View>
 
