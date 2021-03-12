@@ -19,11 +19,11 @@ export default class TeacherHomeScreen extends React.Component{
                             Progress
                         </Text>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Notifications")}}>
+                     <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("GiveNotification")}}>
                         <Text>
                            My Notfications
                         </Text>
-                    </TouchableOpacity> */} 
+                    </TouchableOpacity> 
                 </View>
             </View>
         );

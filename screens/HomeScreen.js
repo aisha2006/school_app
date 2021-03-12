@@ -6,7 +6,15 @@ export default class HomeScreen extends React.Component{
     render(){
         return(
             <View style = {styles.container}>
-                   <Text style={styles.title}>Home Screen</Text>
+                <View>
+                    <TouchableOpacity 
+                    style={{marginRight:200}}
+                    onPress={this.props.navigation.navigate("Drawer")}>
+                      <Text>sideBar</Text>  
+                    </TouchableOpacity>
+                    <Text style={styles.title}>Home Screen</Text>                
+                </View>
+                   
 
                 <View>
                     <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Assignments")}}>
@@ -22,6 +30,11 @@ export default class HomeScreen extends React.Component{
                     <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Notifications")}}>
                         <Text>
                            My Notfications
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("SettingsScreen")}}>
+                        <Text>
+                           Settings
                         </Text>
                     </TouchableOpacity>
                 </View>

@@ -3,62 +3,52 @@ import { StyleSheet, Text, View,TouchableOpacity,TextInput } from 'react-native'
 import firebase from "firebase";
 import db from '../config'
 
-export default class HomeworkForm extends React.Component{
+export default class NotificationForm extends React.Component{
     constructor(){
         super();
         this.state={
-            topic:"",
-            instructions:"",
-            submisson_date:""
+            title:"",
+            message:"",
+            status:"unread"
         }
     }
 
-    
-
-    addAssignments=()=>{
-        db.collection("Assignments").add({
-            "topic":this.state.topic,
-            "instructions":this.state.instructions,
-            "submissionDate":this.state.submisson_date,
+    addNotifications=()=>{
+        db.collection("Notifications").add({
+            "title":this.state.title,
+            "message":this.state.message,
+            "date": firebase.firestore.FieldValue.serverTimestamp(),
+            "status":this.state.status,
         })
     }
     render(){
         return(
             <View style={styles.container}>
                 <TextInput
-                placeholder="topic"
-                onChangeText={(topic)=>{
+                placeholder="title"
+                onChangeText={(title)=>{
                     this.setState({
-                        topic:topic
+                        title:title
                     })
                 }}
                 />
+
                 <TextInput
-                placeholder="give instructions"
+                placeholder="message"
                 multiline={true}
-                onChangeText={(instructions)=>{
+                onChangeText={(message)=>{
                     this.setState({
-                        instructions:instructions
+                        message:message
                     })
                 }}
                 />
-
-                <TextInput
-                placeholder="when to submit"
-                onChangeText={(submitDate)=>{
-                    this.setState({
-                        submisson_date:submitDate
-                    })
-                }}
-                />
-
                 
                 <TouchableOpacity onPress={()=>{
-                    this.addAssignments();
+                    this.addNotifications();
                     this.setState({
-                        topic:"",
-                        instructions:"",
-                        submisson_date:""
+                       title:"",
+                       message:"",
+                       status:"unread"
                     })
                     }}>
                     <Text>submit</Text>

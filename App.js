@@ -11,7 +11,11 @@ import GiveAssignmentsScreen from "./screens/GiveAssignmentsScreen"
 import HomeworkForm from "./screens/HomeworkForm";
 import getAssignmentsDetails from "./screens/GetAssignmentDetails"
 import GiveProgressScreen from "./screens/GiveProgressScreen";
-import ProgressForm from "./screens/ProgressForm"
+import ProgressForm from "./screens/ProgressForm";
+import GiveNotificationScreen from "./screens/GiveNotificationScreen";
+import NotificationForm from "./screens/NotificationForm";
+import SettingsScreen from "./screens/SettingsScreen";
+import {AppDrawerNavigator} from "./components/AppDrawerNavigator";
 
 export default class App extends React.Component {
   render(){
@@ -33,9 +37,13 @@ export default class App extends React.Component {
    GiveAssignments:{screen:GiveAssignmentsScreen},
    HomeworkForm:{screen:HomeworkForm},
    GiveProgress:{screen:GiveProgressScreen},
-   ProgressForm:{screen:ProgressForm}
+   ProgressForm:{screen:ProgressForm},
+   GiveNotification:{screen:GiveNotificationScreen},
+   NotificationForm:{screen:NotificationForm},
+   SettingsScreen: {screen: SettingsScreen},
+
  // AssignmentsDetails:{screen:getAssignmentsDetails}
-//   Drawer: {screen: AppDrawerNavigator},
+   Drawer: {screen: AppDrawerNavigator},
 //   BottomTab: {screen: AppTabNavigator}
  });
 

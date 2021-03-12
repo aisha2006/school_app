@@ -18,11 +18,9 @@ export default class NotificationsScreen extends React.Component{
             var notifications=[];
            doc.docs.map((data)=>{
                var notification = data.data();
-               notifications.push(notification)
+               notifications.push(notification);
            })
-           this.setState({
-               notificationList:notifications
-           })
+           this.setState({notificationList:notifications});
             
         })
     }
@@ -49,11 +47,11 @@ export default class NotificationsScreen extends React.Component{
               
         //     }
         //   bottomDivider
-        // />
+        // /><Text>{item.date}</Text>
         <View>
           <Text>{item.title}</Text>
           <Text>{item.message}</Text>
-          <Text>{item.date}</Text>
+          
           <Button
           title={"View"}
           />

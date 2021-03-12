@@ -11,49 +11,75 @@ export default class GiveProgressScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View>
+        <View>
+          <Text style={styles.title}>Give Progress Report</Text>
+          <TouchableOpacity style={{marginRight:1200}} 
+                onPress={()=>{this.props.navigation.navigate("TeacherHomeScreen")}}>
+                        <Text>
+                            back
+                        </Text>
+          </TouchableOpacity>
+        </View>
+          <TouchableOpacity style={{marginRight:1200}} 
+                onPress={()=>{this.props.navigation.navigate("HomeScreen")}}>
+                        <Text>
+                            back
+                        </Text>
+          </TouchableOpacity>
+        </View>
+        
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
           <Text>english</Text>
         </TouchableOpacity>
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
           <Text>hindi</Text>
         </TouchableOpacity>
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
           <Text>kannada</Text>
         </TouchableOpacity>
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
           <Text>sanskrit</Text>
         </TouchableOpacity>
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
           <Text>marathi</Text>
         </TouchableOpacity>
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
           <Text>science</Text>
         </TouchableOpacity>
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
           <Text>maths</Text>
         </TouchableOpacity>
         <TouchableOpacity
+        style={styles.button}
           onPress={() => {
             this.props.navigation.navigate('ProgressForm');
           }}>
@@ -77,4 +103,8 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     color: 'white',
   },
+
+  button: {
+    marginBottom:"2%"
+}
 });

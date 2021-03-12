@@ -2,12 +2,12 @@ import React from 'react';
 import {  View } from 'react-native';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import AssignmentsScreen from "../screens/AssignmentsScreens";
-import AttendanceScreen from "../screen/AttendanceScreen"
-import ProgressScreen from "../screen/ProgressScreen"
-import SettingsScreen from "../screen/SettingsScreen"
+import AttendanceScreen from "../screens/AttendanceScreen"
+import ProgressScreen from "../screens/ProgressScreen"
+import SettingsScreen from "../screens/SettingsScreen"
 import SideBarMenu from "./SideBarMenu";
-import HomeScreen from "../screen/HomeScreen"
-import NotificationsScreen from "../screen/NotificationsScreen"
+import HomeScreen from "../screens/HomeScreen"
+import NotificationsScreen from "../screens/NotificationsScreen"
 
 
 
