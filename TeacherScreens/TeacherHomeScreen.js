@@ -14,6 +14,11 @@ export default class TeacherHomeScreen extends React.Component{
                             Assignments
                         </Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("GiveAttendance")}}>
+                        <Text>
+                            Attendance
+                        </Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("GiveProgress")}}>
                         <Text>
                             Progress

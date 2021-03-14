@@ -9,9 +9,6 @@ import SideBarMenu from "./SideBarMenu";
 import HomeScreen from "../screens/HomeScreen"
 import NotificationsScreen from "../screens/NotificationsScreen"
 
-
-
-
 export const AppDrawerNavigator = createDrawerNavigator({
     Home:{screen:HomeScreen},
     Assignments:{screen:AssignmentsScreen},

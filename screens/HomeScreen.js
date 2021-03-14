@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity,Image } from 'react-native';
 
 
 export default class HomeScreen extends React.Component{
@@ -8,15 +8,20 @@ export default class HomeScreen extends React.Component{
             <View style = {styles.container}>
                 <View>
                     <TouchableOpacity 
-                    style={{marginRight:200}}
+                    style={{marginRight:200,alignItems:"center"}}
                     onPress={this.props.navigation.navigate("Drawer")}>
-                      <Text>sideBar</Text>  
+                      <Text>sideBar</Text>
+                      <Image
+                      style={{alignSelf:"center",justifyContent:"center"}}
+                      source={require("../assets/hamburger-icon.png")}
+                      />
                     </TouchableOpacity>
                     <Text style={styles.title}>Home Screen</Text>                
                 </View>
                    
 
                 <View>
+                    
                     <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("Assignments")}}>
                         <Text>
                             Assignments

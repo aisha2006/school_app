@@ -6,16 +6,17 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import AssignmentsScreen from "./screens/AssignmentsScreens";
 import ProgressScreen from "./screens/ProgressScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";
-import TeacherHomeScreen from "./screens/TeacherHomeScreen";
-import GiveAssignmentsScreen from "./screens/GiveAssignmentsScreen"
-import HomeworkForm from "./screens/HomeworkForm";
-import getAssignmentsDetails from "./screens/GetAssignmentDetails"
-import GiveProgressScreen from "./screens/GiveProgressScreen";
-import ProgressForm from "./screens/ProgressForm";
-import GiveNotificationScreen from "./screens/GiveNotificationScreen";
-import NotificationForm from "./screens/NotificationForm";
+import TeacherHomeScreen from "./TeacherScreens/TeacherHomeScreen";
+import GiveAssignmentsScreen from "./TeacherScreens/GiveAssignmentsScreen"
+import HomeworkForm from "./Forms/HomeworkForm";
+import getAssignmentsDetails from "./Details/GetAssignmentDetails"
+import GiveProgressScreen from "./TeacherScreens/GiveProgressScreen";
+import ProgressForm from "./Forms/ProgressForm";
+import GiveNotificationScreen from "./TeacherScreens/GiveNotificationScreen";
+import NotificationForm from "./Forms/NotificationForm";
 import SettingsScreen from "./screens/SettingsScreen";
 import {AppDrawerNavigator} from "./components/AppDrawerNavigator";
+import GiveAttendanceScreen from "./TeacherScreens/GiveAttendanceScreen";
 
 export default class App extends React.Component {
   render(){
@@ -41,9 +42,10 @@ export default class App extends React.Component {
    GiveNotification:{screen:GiveNotificationScreen},
    NotificationForm:{screen:NotificationForm},
    SettingsScreen: {screen: SettingsScreen},
-
+   Drawer: AppDrawerNavigator,
+   GiveAttendance:{screen:GiveAttendanceScreen}
  // AssignmentsDetails:{screen:getAssignmentsDetails}
-   Drawer: {screen: AppDrawerNavigator},
+ 
 //   BottomTab: {screen: AppTabNavigator}
  });
 
