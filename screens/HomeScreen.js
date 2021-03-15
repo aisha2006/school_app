@@ -7,7 +7,7 @@ export default class HomeScreen extends React.Component{
         return(
             <View style = {styles.container}>
                 <View>
-                    <TouchableOpacity 
+                    {/* <TouchableOpacity 
                     style={{marginRight:200,alignItems:"center"}}
                     onPress={this.props.navigation.navigate("Drawer")}>
                       <Text>sideBar</Text>
@@ -15,6 +15,12 @@ export default class HomeScreen extends React.Component{
                       style={{alignSelf:"center",justifyContent:"center"}}
                       source={require("../assets/hamburger-icon.png")}
                       />
+                    </TouchableOpacity> */}
+                    <TouchableOpacity 
+                    style={{marginRight:200,alignItems:"center"}}
+                    onPress={()=>{this.props.navigation.navigate("SettingsScreen")}}
+                    >
+                      <Text>profile</Text>
                     </TouchableOpacity>
                     <Text style={styles.title}>Home Screen</Text>                
                 </View>
@@ -40,6 +46,11 @@ export default class HomeScreen extends React.Component{
                     <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("SettingsScreen")}}>
                         <Text>
                            Settings
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("AttendanceScreen")}}>
+                        <Text>
+                           Attendance
                         </Text>
                     </TouchableOpacity>
                 </View>
