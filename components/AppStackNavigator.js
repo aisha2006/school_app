@@ -1,18 +1,18 @@
-import React from 'react';
-import { View } from 'react-native';
+//import React from 'react';
+//import { View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from '../screen/HomeScreen';
 import { AppDrawerNavigator } from './AppDrawerNavigator';
 
 export const AppStackNavigator = createStackNavigator(
   {
-    Home: {
+    Home1: {
       screen: HomeScreen,
       navigationOptions: {
         headerShown: false,
       },
     },
-    Drawer: {
+    Drawer1: {
       screen: AppDrawerNavigator,
       navigationOptions: {
         headerShown: false,
@@ -23,6 +23,6 @@ export const AppStackNavigator = createStackNavigator(
     contentComponent: SideBarMenu,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Home1',
   }
 );

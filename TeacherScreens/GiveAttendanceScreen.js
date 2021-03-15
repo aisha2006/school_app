@@ -50,6 +50,7 @@ export default class GiveAttendanceScreen extends React.Component{
       //   bottomDivider
       // />
       <View>
+      <View>
         <Text>{item.name}</Text>
         <TouchableOpacity onPress={()=>{
                 db.collection('Students').where("email","==",this.state.docId).get()
@@ -68,31 +69,30 @@ export default class GiveAttendanceScreen extends React.Component{
                 db.collection('Students').where("email","==",this.state.docId).get()
                 .then((snapshot)=>{
                   snapshot.forEach((doc)=>{
-                    db.collection('Students').doc(doc.id).update({
+                      db.collection('Students').doc(doc.id).update({
                       present: false,
                       dateOfAttendance:this.state.dateOfAttendance
-                  })        
+                  })
+                 
         })
                 })
     }}>
             <Text>Absent</Text></TouchableOpacity>
       </View>
-      
+     -------------
+      </View>
     )
   }
     render(){
         return(
             <View style={styles.container}>
              <Text style={styles.title}>Give Attendance</Text>
-                        <View>
+                        <View style={styles.box}>
                         <FlatList
                         keyExtractor={this.keyExtractor}
                         data={this.state.StudentsList}
                         renderItem={this.renderItem}
                       />
-                      <View>
-                      <Text>test</Text>
-                      </View>
                       </View>
             </View>
         );
@@ -115,5 +115,10 @@ const styles = StyleSheet.create({
           },
           button: {
             marginBottom:"2%"
+        },
+        box:{
+          margin:6,
+          justifyContent:"flex-start",
+          alignSelf:"flex-start"
         }
 });

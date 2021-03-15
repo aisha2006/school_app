@@ -63,7 +63,7 @@ export default class AssignmentScreen extends React.Component{
             <View style={styles.container}>
                 <Text style={styles.title}>Assignment Screen</Text>
                 <TouchableOpacity style={{marginRight:1200}} 
-                onPress={()=>{this.props.navigation.navigate("HomeScreen")}}>
+                onPress={()=>{this.props.navigation.navigate("Home")}}>
                         <Text>
                             back
                         </Text>

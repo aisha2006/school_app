@@ -65,7 +65,7 @@ export default class ProgressScreen extends React.Component{
               <View style={styles.container}>
                   <Text style={styles.title}>progress Screen</Text>
                   <TouchableOpacity style={{marginRight:1200}} 
-                  onPress={()=>{this.props.navigation.navigate("HomeScreen")}}>
+                  onPress={()=>{this.props.navigation.navigate("Home")}}>
                           <Text>
                               back
                           </Text>
