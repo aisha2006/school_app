@@ -7,24 +7,26 @@ export default class HomeScreen extends React.Component{
         return(
             <View style = {styles.container}>
                 <View>
+                <View>
+                    <Text style={styles.title}>Home Screen</Text>  
                      <TouchableOpacity 
-                    style={{marginRight:200,alignItems:"center"}}
-                    onPress={this.props.navigation.navigate("Drawer")}>
+                      style={{marginRight:200,alignItems:"center"}}
+                      onPress={this.props.navigation.navigate("AppDrawer")}>
                       <Text>sideBar</Text>
                       <Image
                       style={{alignSelf:"center",justifyContent:"center"}}
                       source={require("../assets/hamburger-icon.png")}
                       />
-                    </TouchableOpacity> 
+                    </TouchableOpacity>  
                      <TouchableOpacity 
                     style={{marginRight:200,alignItems:"center"}}
                     onPress={()=>{this.props.navigation.navigate("Settings")}}
                     >
                       <Text>profile</Text>
                     </TouchableOpacity> 
-                    <Text style={styles.title}>Home Screen</Text>                
+                                  
                 </View>
-                   
+                </View>   
 
                 <View>
                     
