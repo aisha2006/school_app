@@ -5,21 +5,26 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
-//import { DrawerItems } from "react-navigation-drawer";
+import { DrawerItems } from "react-navigation-drawer";
 import { Avatar } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import firebase from "firebase";
 import db from "../config";
+import AppDrawerNavigator from "./AppDrawerNavigator";
 // import axios from "axios";
 
-export default class CustomSideBarMenu extends Component {
-  state = {
+export default class SideBarMenu extends Component {
+  constructor(props){
+    super();
+    this.state = {
     userId: firebase.auth().currentUser.email,
     image: "#",
     name: "",
     docId: "",
   };
+  }
+  
 
   selectPicture = async () => {
     const { cancelled, uri } = await ImagePicker.launchImageLibraryAsync({
@@ -104,8 +109,6 @@ export default class CustomSideBarMenu extends Component {
             }}
             size={"xlarge"}
             onPress={() => this.selectPicture()}
-            containerStyle={styles.imageContainer}
-            showEditButton
           /> 
             </TouchableOpacity>
            
@@ -113,11 +116,13 @@ export default class CustomSideBarMenu extends Component {
           <Text style={{ fontWeight: "100", fontSize: 20, paddingTop: 10 }}>
             {this.state.name}
           </Text>
-        </View>
-
-        {/* <View style={styles.drawerItemsContainer}>
+          <View style={styles.drawerItemsContainer}>
           <DrawerItems {...this.props} />
-        </View> */}
+        </View>
+        </View>
+{/* 
+             <View><View> <DrawerItems {...this.props} /> </View></View>  */}
+          
         <View style={styles.logOutContainer}>
           <TouchableOpacity
             style={styles.logOutButton}

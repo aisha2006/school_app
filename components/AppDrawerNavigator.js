@@ -13,28 +13,12 @@ import AssignmentScreen from '../screens/AssignmentsScreens';
 import GetAssignmentDetails from "../Details/GetAssignmentDetails"
 
 export const AppDrawerNavigator = createDrawerNavigator({
-  Home1 : {
+  Home : {
     screen : HomeScreen,
-    },
-  AssignmentsScreen : {
-    screen : AssignmentScreen
-  },
-  NotificationsScreen : {
-    screen : NotificationsScreen
-  },
-   AttendanceScreen:{
-    screen: AttendanceScreen
-  },
-  SettingsScreen : {
-    screen : SettingsScreen
-  },
-  ProgressScreen : {
-    screen : ProgressScreen
-  },
-},
+    }},
   {
     contentComponent:SideBarMenu
   },
   {
-    initialRouteName : 'Home1'
+    initialRouteName : 'Home'
   })

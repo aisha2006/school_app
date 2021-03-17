@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
+import { Header} from 'react-native-elements';
+
 export default class WelcomeScreen extends React.Component {
   constructor() {
     super();
@@ -50,7 +52,7 @@ export default class WelcomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.title}>Welcome Screen</Text>
+         <Text style={styles.title}>Welcome Screen</Text>
         </View>
         <View>
           <TextInput
