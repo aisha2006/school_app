@@ -7,14 +7,25 @@ export default class GiveAttendanceScreen extends React.Component{
     constructor(){
         super();
         this.state={
-            docId:firebase.auth().currentUser.email,
+            docId:"",
             StudentsList:[],
             dateOfAttendance:firebase.firestore.FieldValue.serverTimestamp(),
         }
         this.StudentRef= null;
     }
+    getUserDetails=()=>{
+      var email = firebase.auth().currentUser.email;
+      db.collection("Students").where("email","==",email).get()
+      .then((snapshot)=>{
+          snapshot.forEach((doc)=>{
+              var data = doc.data();
+              this.setState({
+                  docId:      doc.id         
+              })
+          })
+      })
+  }
 
-     
   getStudentsList=()=>{
     this.StudentRef = db.collection("Students")
     .onSnapshot((snapshot)=>{
@@ -27,6 +38,7 @@ export default class GiveAttendanceScreen extends React.Component{
 
   componentDidMount(){
     this.getStudentsList()
+    this.getUserDetails()
     //console.log(this.state.StudentsList);
   }
 

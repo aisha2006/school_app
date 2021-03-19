@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,FlatList , Button} from 'react-native';
+import {ListItem} from "react-native-elements";
 import firebase from 'firebase';
-import db from '../config'
+import db from '../config';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default class AssignmentScreen extends React.Component{
     constructor(){
@@ -35,22 +37,25 @@ export default class AssignmentScreen extends React.Component{
 
   renderItem = ( {item, i} ) =>{
     return(
-      // <ListItem
+      // <SafeAreaProvider>
+      //   <ListItem
       //   key={i}
-      //   title={item.topic}
-      //   subtitle={item.instructions}
-      //   titleStyle={{ color: 'black', fontWeight: 'bold' }}
-      //   rightElement={  
-      //         <Text style={{color:'red'}}>View</Text>
+      //   title={"topic"}
+      //   subtitle={"instructions"}
+      //   //titleStyle={{ color: 'black', fontWeight: 'bold' }}
+      //   // rightElement={  
+      //   //       <Text style={{color:'red'}}>View</Text>
             
-      //     }
-      //   bottomDivider
+      //   //   }
+      //  // bottomDivider
       // />
+      // </SafeAreaProvider>
+      
       <View>
         <Text>{item.topic}</Text>
-        <Text>{item.instructions}</Text>
         <Text>{item.submission_date}</Text>
         <Button
+        onPress={()=>{this.props.navigation.navigate("getAssignmentsDetails")}}
         title={"View"}
         />
       </View>
@@ -82,9 +87,6 @@ export default class AssignmentScreen extends React.Component{
                         data={this.state.assignmentsList}
                         renderItem={this.renderItem}
                       />
-                      <View>
-                      <Text>test</Text>
-                      </View>
                       </View>
                         )
                       }

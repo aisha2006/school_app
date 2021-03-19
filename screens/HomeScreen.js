@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { Header, Icon, Badge } from 'react-native-elements';
+import { Header, Icon } from 'react-native-elements';
+import MyHeader from "../components/MyHeader";
 
 export default class HomeScreen extends React.Component {
   render() {
@@ -8,8 +9,7 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <View>
           <View>
-            <Text style={styles.title}>Home Screen</Text> 
-            {/* //<MyHeader title="Home Screen" navigation ={this.props.navigation}/> */}
+            <MyHeader title={"Home Screen"}/>
             {/* <TouchableOpacity 
                       style={{marginRight:200,alignItems:"center"}}
                       onPress={this.props.navigation.toggleDrawer()}>
@@ -28,21 +28,27 @@ export default class HomeScreen extends React.Component {
                 }}
                 //backgroundColor="#eaf8fe"
               /> */}
-
+          {/* <View style={{marginRight:1100}}>
             <Icon
-            style={{alignSelf:"flex-start"}}
               name="bars"
               type="font-awesome"
               color="#696969"
-              onPress={() => this.props.navigation.navigate("AppDrawer")}
+              // onPress={() => {
+              //   this.props.navigation.toggleDrawer();
+              // }}
             /> 
-            <TouchableOpacity
-              style={{ marginRight: 200, alignItems: 'center' }}
+          </View> */}
+          {/* <View><Text style={styles.title}>Home Screen</Text></View> */}
+            {/* <View>
+              <TouchableOpacity
+              style={{alignItems: 'center',alignSelf:"flex-end" }}
               onPress={() => {
                 this.props.navigation.navigate('Settings');
               }}>
               <Text>profile</Text>
             </TouchableOpacity>
+            </View> */}
+            <View/>
           </View>
         </View>
 
