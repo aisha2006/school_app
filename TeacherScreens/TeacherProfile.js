@@ -28,14 +28,12 @@ export default class SideBarMenu extends Component {
     address:"",
     contact:"",
     dob:"",
-    class:"",
-    section:"",
   };
   }
   
   getUserDetails=()=>{
     var email = firebase.auth().currentUser.email;
-    db.collection("Students").where("email","==",email).get()
+    db.collection("Teachers").where("email","==",email).get()
     .then((snapshot)=>{
         snapshot.forEach((doc)=>{
             var data = doc.data();
@@ -45,8 +43,6 @@ export default class SideBarMenu extends Component {
                 address:    data.address,
                 contact:    data.contact,
                 dob:        data.dob,
-                class:      data.class,
-                section:    data.section,
                 docId:      doc.id         
             })
         })
@@ -54,7 +50,7 @@ export default class SideBarMenu extends Component {
 }
 
 updateUserDetails=()=>{
-    db.collection("Students").doc(this.state.docId)
+    db.collection("Teachers").doc(this.state.docId)
     .update({
         "address": this.state.address,
         "contact": this.state.contact
@@ -107,7 +103,7 @@ updateUserDetails=()=>{
   };
 
   getUserProfile() {
-    db.collection("Students")
+    db.collection("Teachers")
       .where("email", "==", this.state.userId)
       .onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -174,8 +170,6 @@ updateUserDetails=()=>{
         <View>
                     <Text>{"Name: "+this.state.name}</Text>
                     <Text>{"Date of Birth: "+this.state.dob}</Text>
-                    <Text>{"Class: "+this.state.class}</Text>
-                    <Text>{"Section: "+this.state.section}</Text>
                     <TextInput 
                     placeholder={"Address"}
                     multiline

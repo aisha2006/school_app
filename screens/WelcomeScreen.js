@@ -6,10 +6,12 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  Image,
 } from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
-import { Header} from 'react-native-elements';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Header, Icon } from 'react-native-elements';
 
 export default class WelcomeScreen extends React.Component {
   constructor() {
@@ -51,9 +53,31 @@ export default class WelcomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
-         <Text style={styles.title}>Welcome Screen</Text>
-        </View>
+        <SafeAreaProvider>
+          <Header
+            centerComponent={
+              <Text
+                style={{ fontSize: 30, color: '#ec9706', fontStyle: 'italic' }}>
+                Welcome Screen
+              </Text>
+            }
+            leftComponent={
+              <Icon
+                type="font-awesome"
+                name="university"
+                onPress={() => {
+                  this.props.navigation.navigate('SchoolHomeScreen');
+                }}
+              />
+            }
+            containerStyle={{
+              width: 1250,
+              height: 50,
+              backgroundColor: 'white',
+            }}
+          />
+        </SafeAreaProvider>
+        <View></View>
         <View>
           <TextInput
             style={styles.loginBox}

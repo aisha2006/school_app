@@ -8,38 +8,36 @@ import {
   Button,
 } from 'react-native';
 import db from '../config';
-import firebase from 'firebase';
 
-export default class AttendanceScreen extends React.Component {
+export default class TeacherNotificationsScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      AttendanceList: [],
-      docId: firebase.auth().currentUser.email,
+      notificationList: [],
     };
-    this.AttendanceRef = null;
+    this.notificationRef = null;
   }
 
-  getAttendance = () => {
-    this.AttendanceRef = db
-      .collection('Students')
-      .where('email', '==', this.state.docId)
+  getNotifications = () => {
+    this.notificationRef = db
+      .collection('Notifications')
+      .where('status', '==', 'unread')
       .onSnapshot((doc) => {
-        var Attendance = [];
+        var notifications = [];
         doc.docs.map((data) => {
-          var attendance = data.data();
-          Attendance.push(attendance);
+          var notification = data.data();
+          notifications.push(notification);
         });
-        this.setState({ AttendanceList: Attendance });
+        this.setState({ notificationList: notifications });
       });
   };
 
   componentDidMount() {
-    this.getAttendance();
+    this.getNotifications();
   }
 
   componentWillUnmount() {
-    this.AttendanceRef();
+    this.notificationRef();
   }
 
   keyExtractor = (item, index) => index.toString();
@@ -58,9 +56,10 @@ export default class AttendanceScreen extends React.Component {
       //   bottomDivider
       // /><Text>{item.date}</Text>
       <View>
-        <Text>
-          {'present: ' + item.present + ' ' + 'on: ' + item.dateOfAttendance}
-        </Text>
+        <Text>{item.title}</Text>
+        <Text>{item.message}</Text>
+
+        <Button title={'View'} />
       </View>
     );
   };
@@ -68,8 +67,7 @@ export default class AttendanceScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Attendance Screen</Text>
-
+        <Text style={styles.title}>Notifications Screen</Text>
         <TouchableOpacity
           style={{ marginRight: 1200 }}
           onPress={() => {
@@ -77,22 +75,21 @@ export default class AttendanceScreen extends React.Component {
           }}>
           <Text>back</Text>
         </TouchableOpacity>
+
         <View>
-          <View>
-            {this.state.AttendanceList.length === 0 ? (
-              <View>
-                <Text>No Attendance</Text>
-              </View>
-            ) : (
-              <View>
-                <FlatList
-                  keyExtractor={this.keyExtractor}
-                  data={this.state.AttendanceList}
-                  renderItem={this.renderItem}
-                />
-              </View>
-            )}
-          </View>
+          {this.state.notificationList.length === 0 ? (
+            <View>
+              <Text>No notifications</Text>
+            </View>
+          ) : (
+            <View>
+              <FlatList
+                keyExtractor={this.keyExtractor}
+                data={this.state.notificationList}
+                renderItem={this.renderItem}
+              />
+            </View>
+          )}
         </View>
       </View>
     );

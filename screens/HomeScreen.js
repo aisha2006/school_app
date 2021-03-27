@@ -1,54 +1,60 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
-import MyHeader from "../components/MyHeader";
+import MyHeader from '../components/MyHeader';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import firebase from 'firebase';
+import db from '../config';
 
 export default class HomeScreen extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      userId: firebase.auth().currentUser.email,
+    };
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <View>
           <View>
-            <MyHeader title={"Home Screen"}/>
-            {/* <TouchableOpacity 
-                      style={{marginRight:200,alignItems:"center"}}
-                      onPress={this.props.navigation.toggleDrawer()}>
-                      <Text>sideBar</Text>
-                      <Image
-                      style={{alignSelf:"center",justifyContent:"center"}}
-                      source={require("../assets/hamburger-icon.png")}
-                      />
-                    </TouchableOpacity>   */}
-
-              {/* <Header
-                //leftComponent={<Icon name='bars' type='font-awesome' color='#696969'  onPress={() => this.props.navigation.toggleDrawer()}/>}
+            <SafeAreaProvider>
+              <Header
+                leftComponent={
+                  <Icon
+                    name="user"
+                    type="font-awesome"
+                    color="#696969"
+                    onPress={() => {
+                      this.props.navigation.navigate('SideBarMenu');
+                    }}
+                  />
+                }
                 centerComponent={{
                   text: 'Home Screen',
-                  style: { color: '#90A5A9', fontSize: 20, fontWeight: 'bold' },
+                  style: { color: '#90A5A9', fontSize: 50, fontWeight: 'bold' },
                 }}
-                //backgroundColor="#eaf8fe"
-              /> */}
-          {/* <View style={{marginRight:1100}}>
-            <Icon
-              name="bars"
-              type="font-awesome"
-              color="#696969"
-              // onPress={() => {
-              //   this.props.navigation.toggleDrawer();
-              // }}
-            /> 
-          </View> */}
-          {/* <View><Text style={styles.title}>Home Screen</Text></View> */}
-            {/* <View>
-              <TouchableOpacity
-              style={{alignItems: 'center',alignSelf:"flex-end" }}
-              onPress={() => {
-                this.props.navigation.navigate('Settings');
-              }}>
-              <Text>profile</Text>
-            </TouchableOpacity>
-            </View> */}
-            <View/>
+                rightComponent={
+                  <Icon
+                    reverse
+                    name="bell"
+                    type="font-awesome"
+                    color="#696969"
+                    onPress={() => {
+                      this.props.navigation.navigate('Notifications');
+                    }}
+                  />
+                }
+                containerStyle={{
+                  backgroundColor: '#eaf8fe',
+                  width: 1230,
+                  marginBottom: 25,
+                }}
+              />
+            </SafeAreaProvider>
+
+            <View />
           </View>
         </View>
 
@@ -58,6 +64,7 @@ export default class HomeScreen extends React.Component {
             onPress={() => {
               this.props.navigation.navigate('Assignments');
             }}>
+            <Icon name="book" type="font-awesome" color="#696969" />
             <Text>Assignments</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -65,28 +72,24 @@ export default class HomeScreen extends React.Component {
             onPress={() => {
               this.props.navigation.navigate('Progress');
             }}>
+            <Icon name="trophy" type="font-awesome" color="#696969" />
             <Text>Progress</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.props.navigation.navigate('Notifications');
+              this.props.navigation.navigate('AttendanceScreen');
             }}>
-            <Text>My Notfications</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.props.navigation.navigate('Settings');
-            }}>
-            <Text>Settings</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.props.navigation.navigate('Attendance');
-            }}>
+            <Icon name="gift" type="font-awesome" color="#696969" />
             <Text>Attendance</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this.props.navigation.navigate('About');
+            }}>
+            <Icon name="university" type="font-awesome" color="#696969" />
+            <Text>About us</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -110,12 +113,12 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginBottom: 50,
-    shadowColor: 'black',
-    shadowOpacity: 50,
-    borderColor: 'white',
+    justifyContent: 'flex-start',
+    alignContent: 'flex-start',
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 100,
     width: 1000,
-    borderWidth: 25,
-    marginRight: 250,
+    marginRight: 220,
   },
 });
