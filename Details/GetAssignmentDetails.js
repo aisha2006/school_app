@@ -7,23 +7,24 @@ export default class GetAssignmentDetails extends React.Component{
     constructor(){
         super();
         this.state={
-            assignmentsList:[]
+            assignmentDetails:[],
+            assignmentId: this.props.navigation.getParam('details')["assignmentId"],
         }
         this.assignmentRef = null;
     }
     
-  getAssignmentsList=()=>{
-    this.assignmentRef = db.collection("Assignments")
+  getAssignmentDetails=()=>{
+    this.assignmentRef = db.collection("Assignments").where("assignmentId","==",this.state.assignmentId)
     .onSnapshot((snapshot)=>{
       var assignmentsList = snapshot.docs.map((doc) => doc.data())
       this.setState({
-        assignmentsList: assignmentsList
+        assignmentDetails: assignmentsList
       });
     })
   }
 
   componentDidMount(){
-    this.getAssignmentsList()
+    this.getAssignmentDetails()
     //console.log(this.state.assignmentsList);
   }
   
@@ -59,7 +60,7 @@ export default class GetAssignmentDetails extends React.Component{
             margin: 10,
           }}>
                       {
-                        this.state.assignmentsList.length === 0? (
+                        this.state.assignmentDetails.length === 0? (
                           <View>
                             <Text>No assignments</Text>
                           </View>
@@ -67,7 +68,7 @@ export default class GetAssignmentDetails extends React.Component{
                           <View>
                         <FlatList
                         keyExtractor={this.keyExtractor}
-                        data={this.state.assignmentsList}
+                        data={this.state.assignmentDetails}
                         renderItem={this.renderItem}
                       />
                       </View>

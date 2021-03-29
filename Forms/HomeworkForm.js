@@ -15,15 +15,22 @@ export default class HomeworkForm extends React.Component{
         }
     }
 
-    
+    createUniqueId(){
+    return Math.random().toString(36).substring(7);
+  }
 
     addAssignments=()=>{
+        var uniqueId = this.createUniqueId()
         db.collection("Assignments").add({
             "topic":this.state.topic,
             "instructions":this.state.instructions,
             "submissionDate":this.state.submisson_date,
+            "assignmentId":uniqueId
         })
     }
+
+    
+  
     render(){
         return(
             <View style={styles.container}>
