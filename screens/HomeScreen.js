@@ -29,6 +29,7 @@ export default class HomeScreen extends React.Component {
                     onPress={() => {
                       this.props.navigation.navigate('SideBarMenu');
                     }}
+                    size={50}
                   />
                 }
                 centerComponent={{

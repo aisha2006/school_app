@@ -69,11 +69,10 @@ export default class CreateTeacherAccount extends Component {
         <View style={styles.modalContainer}>
           <ScrollView style={{ width: '100%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              <Text style={styles.modalTitle}>Registration</Text>
+              <Text style={styles.modalTitle}> Teacher Registration</Text>
               <TextInput
                 style={styles.formTextInput}
                 placeholder={'name'}
-                maxLength={8}
                 onChangeText={(text) => {
                   this.setState({
                     name: text,
@@ -167,7 +166,7 @@ export default class CreateTeacherAccount extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8BE85',
+    backgroundColor: '##1ef5fc5',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -185,10 +184,12 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    borderRadius: 20,
+    borderRadius:50,
+    borderWidth: 5,
+    borderColor:"black",
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffff',
+    backgroundColor: '#1ef5fc',
     marginRight: 30,
     marginLeft: 30,
     marginTop: 80,

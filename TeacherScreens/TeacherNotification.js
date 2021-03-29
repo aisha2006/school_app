@@ -8,6 +8,8 @@ import {
   Button,
 } from 'react-native';
 import db from '../config';
+import {Header,Icon} from "react-native-elements";
+import {SafeAreaProvider} from "react-native-safe-area-context";
 
 export default class TeacherNotificationsScreen extends React.Component {
   constructor() {
@@ -67,14 +69,36 @@ export default class TeacherNotificationsScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Notifications Screen</Text>
-        <TouchableOpacity
-          style={{ marginRight: 1200 }}
-          onPress={() => {
-            this.props.navigation.navigate('HomeScreen');
-          }}>
-          <Text>back</Text>
-        </TouchableOpacity>
+          <SafeAreaProvider>
+          <Header
+            centerComponent={
+              <Text
+                style={{
+                  fontSize: 20,
+                  textDecorationColor: 'black',
+                  color: 'white',
+                  fontStyle: 'italic',
+                }}>
+                My Notifications
+              </Text>
+            }
+            leftComponent={
+              <Icon
+                name="long-arrow-left"
+                type="font-awesome"
+                onPress={() => {
+                  this.props.navigation.navigate('TeacherHomeScreen');
+                }}
+              />
+            }
+            containerStyle={{
+              width: 1250,
+              height: 50,
+              backgroundColor: '#1ef5fc',
+            }}
+          />
+        </SafeAreaProvider>
+
 
         <View>
           {this.state.notificationList.length === 0 ? (

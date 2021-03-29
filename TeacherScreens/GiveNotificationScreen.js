@@ -1,19 +1,42 @@
 import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput } from 'react-native';
+import {Header,Icon} from "react-native-elements";
+import {SafeAreaProvider} from "react-native-safe-area-context";
 
 export default class GiveNotificationScreen extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-               <View>
-          <Text style={styles.title}>Give Notifications</Text>
-          <TouchableOpacity style={{marginRight:1200}} 
-                onPress={()=>{this.props.navigation.navigate("TeacherHomeScreen")}}>
-                        <Text>
-                            back
-                        </Text>
-          </TouchableOpacity>
-        </View>
+                 <SafeAreaProvider>
+          <Header
+            centerComponent={
+              <Text
+                style={{
+                  fontSize: 20,
+                  textDecorationColor: 'black',
+                  color: 'white',
+                  fontStyle: 'italic',
+                }}>
+                Give Notifications Screen
+              </Text>
+            }
+            leftComponent={
+              <Icon
+                name="long-arrow-left"
+                type="font-awesome"
+                onPress={() => {
+                  this.props.navigation.navigate('TeacherHomeScreen');
+                }}
+              />
+            }
+            containerStyle={{
+              width: 1250,
+              height: 50,
+              backgroundColor: '#1ef5fc',
+            }}
+          />
+        </SafeAreaProvider>
+
                 <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("NotificationForm")}}>
                     <Text>assignments</Text>
                 </TouchableOpacity>

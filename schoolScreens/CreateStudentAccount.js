@@ -24,7 +24,7 @@ export default class CreateStudentAccount extends Component {
       address: '',
       contact: '',
       confirmPassword: '',
-      image: '#',
+      image: require("../assets/user.png"),
       dob: '',
       isPresent: true,
       dateOfAttendance: '',
@@ -77,11 +77,10 @@ export default class CreateStudentAccount extends Component {
         <View style={styles.modalContainer}>
           <ScrollView style={{ width: '100%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              <Text style={styles.modalTitle}>Registration</Text>
+              <Text style={styles.modalTitle}> Student Registration</Text>
               <TextInput
                 style={styles.formTextInput}
                 placeholder={'name'}
-                maxLength={8}
                 onChangeText={(text) => {
                   this.setState({
                     name: text,
@@ -173,12 +172,16 @@ export default class CreateStudentAccount extends Component {
               <View style={styles.modalBackButton}>
                 <TouchableOpacity
                   style={styles.registerButton}
+                  
                   onPress={() =>
-                    this.userSignUp(
+                   {
+                      this.userSignUp(
                       this.state.emailId,
                       this.state.password,
                       this.state.confirmPassword
-                    )
+                    );
+                    this.setState({schoolEmail:firebase.auth().currentUser.email})
+                    this.props.navigation.navigate('SchoolHomeScreen');}
                   }>
                   <Text style={styles.registerButtonText}>Register</Text>
                 </TouchableOpacity>
@@ -194,7 +197,7 @@ export default class CreateStudentAccount extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8BE85',
+    backgroundColor: '#1ef5fc5',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -212,10 +215,12 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    borderRadius: 20,
+    borderRadius:50,
+    borderWidth: 5,
+    borderColor:"black",
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffff',
+    backgroundColor: '#1ef5fc5',
     marginRight: 30,
     marginLeft: 30,
     marginTop: 80,

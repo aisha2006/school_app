@@ -70,8 +70,7 @@ export default class AssignmentScreen extends React.Component {
               ()=>{
                 this.props.navigation.navigate("GetAssignmentsDetails")
               }
-            }
-            >
+            }>
           <Text>View</Text>
         </TouchableOpacity>
       </View>

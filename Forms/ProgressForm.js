@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput } from 'react-native';
 import firebase from "firebase";
-import db from '../config'
+import db from '../config';
+import {Header,Icon} from "react-native-elements";
+import {SafeAreaProvider} from "react-native-safe-area-context";
 
 export default class ProgressForm extends React.Component{
     constructor(){
@@ -31,6 +33,35 @@ export default class ProgressForm extends React.Component{
     render(){
         return(
             <View style={styles.container}>
+                    <SafeAreaProvider>
+          <Header
+            centerComponent={
+              <Text
+                style={{
+                  fontSize: 20,
+                  textDecorationColor: 'black',
+                  color: 'white',
+                  fontStyle: 'italic',
+                }}>
+                Give Progress Report
+              </Text>
+            }
+            leftComponent={
+              <Icon
+                name="long-arrow-left"
+                type="font-awesome"
+                onPress={() => {
+                  this.props.navigation.navigate('GiveProgress');
+                }}
+              />
+            }
+            containerStyle={{
+              width: 1250,
+              height: 50,
+              backgroundColor: '#1ef5fc',
+            }}
+          />
+        </SafeAreaProvider>
                 <TextInput
                 placeholder="name"
                 onChangeText={(name)=>{

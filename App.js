@@ -26,6 +26,7 @@ import GiveSchoolNotifications from "./schoolScreens/GiveSchoolNotifications";
 import SchoolHomeScreen from "./schoolScreens/SchoolHomeScreen";
 import CreateStudentAccount from "./schoolScreens/CreateStudentAccount";
 import CreateTeacherAccount from "./schoolScreens/CreateTeacherAccount"
+import SchoolLoginScreen from "./schoolScreens/SchoolLoginScreen"
 //forms
 import NotificationForm from "./Forms/NotificationForm";
 import ProgressForm from "./Forms/ProgressForm";
@@ -81,6 +82,7 @@ const AppDrawerNavigator = createDrawerNavigator({
    GiveAttendance:{screen:GiveAttendanceScreen},
    TeacherProfile:{screen:TeacherProfile},
    //school screens
+   SchoolLoginScreen:{screen:SchoolLoginScreen},
    GiveSchoolNotifications:{screen:GiveSchoolNotifications},
    SchoolHomeScreen:{screen:SchoolHomeScreen},
    CreateStudentAccount:{screen:CreateStudentAccount},

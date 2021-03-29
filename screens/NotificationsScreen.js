@@ -66,12 +66,12 @@ export default class NotificationsScreen extends React.Component {
             borderWidth: 1,
             borderColor: 'blue',
             backgroundColor: '#1ef5fd',
-          }}>
+          }}
             onPress={
               ()=>{
                 this.props.navigation.navigate("GetNotificationDetails")
               }
-            }
+            }>
           <Text>View</Text>
         </TouchableOpacity>
       </View>

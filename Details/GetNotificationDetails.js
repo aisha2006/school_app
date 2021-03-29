@@ -35,7 +35,7 @@ export default class GetNotificationDetails extends React.Component{
       <View>
         <Text>{item.title}</Text>
         <Text>{item.message}</Text>
-        <Text>{item.date}</Text>  
+        {/* <Text>{item.date}</Text>   */}
       </View>
       
     )

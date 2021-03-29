@@ -13,35 +13,22 @@ import db from '../config';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Header, Icon } from 'react-native-elements';
 
-export default class WelcomeScreen extends React.Component {
+export default class SchoolLoginScreen extends React.Component {
   constructor() {
     super();
     this.state = {
+      schoolName:"",
       emailId: '',
       password: '',
     };
   }
 
-  userLogin = (email, password) => {
+  SchoolLogin = (email, password) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.props.navigation.navigate('HomeScreen');
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        return Alert.alert(errorMessage);
-      });
-  };
-
-  TeacherLogin = (email, password) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.props.navigation.navigate('TeacherHomeScreen');
+        this.props.navigation.navigate('SchoolHomeScreen');
       })
       .catch((error) => {
         var errorCode = error.code;
@@ -66,19 +53,27 @@ export default class WelcomeScreen extends React.Component {
                 type="font-awesome"
                 name="university"
                 onPress={() => {
-                  this.props.navigation.navigate('SchoolLoginScreen');
+                  this.props.navigation.navigate('SchoolHomeScreen');
                 }}
               />
             }
             containerStyle={{
               width: 1250,
               height: 50,
-              backgroundColor: '#1ef5fc',
+              backgroundColor: 'white',
             }}
           />
         </SafeAreaProvider>
         <View></View>
         <View>
+        <TextInput
+            style={styles.loginBox}
+            placeholder="school name"
+            onChangeText={(school) => {
+              this.setState({ schoolName: school });
+            }}
+          />
+
           <TextInput
             style={styles.loginBox}
             keyboardType="email-address"
@@ -101,38 +96,9 @@ export default class WelcomeScreen extends React.Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
-              this.userLogin(this.state.emailId, this.state.password);
+              this.SchoolLogin(this.state.emailId, this.state.password);
             }}>
-            <Text> student Login</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View>
-          <TextInput
-            style={styles.loginBox}
-            keyboardType="email-address"
-            placeholder="abc@mail.com"
-            onChangeText={(email) => {
-              this.setState({ emailId: email });
-            }}
-          />
-
-          <TextInput
-            style={styles.loginBox}
-            secureTextEntry={true}
-            placeholder="enter password"
-            placeholderTextColor="gray"
-            onChangeText={(password) => {
-              this.setState({ password: password });
-            }}
-          />
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.TeacherLogin(this.state.emailId, this.state.password);
-            }}>
-            <Text> teacher Login</Text>
+            <Text>Login</Text>
           </TouchableOpacity>
         </View>
       </View>

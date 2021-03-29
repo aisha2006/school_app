@@ -1,11 +1,42 @@
 import React from 'react';
 import { StyleSheet, Text, View,TouchableOpacity,TextInput } from 'react-native';
+import {Header,Icon} from "react-native-elements";
+import {SafeAreaProvider} from "react-native-safe-area-context";
 
 export default class GiveAssignmentScreen extends React.Component{
     render(){
         return(
             <View style={styles.container}>
-                <Text style={styles.title}>Give Assignments</Text>
+                   <SafeAreaProvider>
+          <Header
+            centerComponent={
+              <Text
+                style={{
+                  fontSize: 20,
+                  textDecorationColor: 'black',
+                  color: 'white',
+                  fontStyle: 'italic',
+                }}>
+                 Give Assignments Screen
+              </Text>
+            }
+            leftComponent={
+              <Icon
+                name="long-arrow-left"
+                type="font-awesome"
+                onPress={() => {
+                  this.props.navigation.navigate('TeacherHomeScreen');
+                }}
+              />
+            }
+            containerStyle={{
+              width: 1250,
+              height: 50,
+              backgroundColor: '#1ef5fc',
+            }}
+          />
+        </SafeAreaProvider>
+
                 <TouchableOpacity style={styles.button} onPress={()=>{this.props.navigation.navigate("HomeworkForm")}}>
                     <Text>english</Text>
                 </TouchableOpacity>
