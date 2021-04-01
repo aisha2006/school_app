@@ -22,12 +22,23 @@ export default class AssignmentScreen extends React.Component {
   }
 
   getAssignmentsList = () => {
-    this.assignmentRef = db.collection('Assignments').onSnapshot((snapshot) => {
-      var assignmentsList = snapshot.docs.map((doc) => doc.data());
-      this.setState({
-        assignmentsList: assignmentsList,
+    this.assignmentRef = db
+    .collection('Assignments')
+    .onSnapshot((doc)=>{
+     doc.docs.map((data) => {
+        var assignment = data.data();
+        db.collection('Students')
+    .where('class', '==', assignment.forClass)
+    .onSnapshot(()=>{
+     doc.docs.map((data) => {
+        var assignments = [];
+        var assignment = data.data();
+         assignments.push(assignment);
+         this.setState({ assignmentsList: assignments });
       });
-    });
+    })
+      });
+    })
   };
 
   componentDidMount() {
@@ -59,7 +70,6 @@ export default class AssignmentScreen extends React.Component {
 
       <View>
         <Text>{item.topic}</Text>
-        <Text>{item.submission_date}</Text>
         <TouchableOpacity
           style={{
             borderWidth: 1,

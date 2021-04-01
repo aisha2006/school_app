@@ -30,6 +30,7 @@ export default class GetNotificationDetails extends React.Component{
   componentWillUnmount(){
     this.NotificationRef();
   }
+  keyExtractor = (item, index) => index.toString()
   renderItem = ( {item, i} ) =>{
     return(
       <View>

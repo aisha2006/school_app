@@ -7,6 +7,9 @@ import {
   TextInput,
   Alert,
   Image,
+  Modal,
+  ScrollView,
+  KeyboardAvoidingView
 } from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
@@ -20,8 +23,48 @@ export default class SchoolLoginScreen extends React.Component {
       schoolName:"",
       emailId: '',
       password: '',
+      NoOfTeachers:'',
+      NoOfStudents:'',
+      isModalVisible:false,
+      address:"",
+      confirmPassword:'',
+      //schoolId:firebase.auth().currentUser.email
     };
   }
+
+  userSignUp = (emailId, password, confirmPassword) => {
+    if (password !== confirmPassword) {
+      return Alert.alert("password doesn't match\nCheck your password.");
+    } else {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(emailId, password)
+        .then(() => {
+          db.collection("Schools").add({
+            Name: this.state.schoolName,
+            Email: this.state.emailId,
+            Location: this.state.address,
+            NoOfTeachers: this.state.NoOfTeachers,
+            NoOfStudents:this.state.NoOfStudents,
+          });
+          return Alert.alert("User Added Successfully", "", [
+            {
+              text: "OK",
+              onPress: () => this.props.navigation.navigate("SchoolHomeScreen")
+            }
+          ]);
+          this.props.navigation.navigate("SchoolHomeScreen")
+          {console.log(this.state.schoolName)}
+        }
+        )
+        .catch(error => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          return Alert.alert(errorMessage);
+        });
+    }
+  };
 
   SchoolLogin = (email, password) => {
     firebase
@@ -37,9 +80,121 @@ export default class SchoolLoginScreen extends React.Component {
       });
   };
 
+  
+  showModal = () => {
+    return (
+      <Modal
+        animationType="fade"
+        transparent={false}
+        visible={this.state.isModalVisible}
+      >
+        <View style={styles.modalContainer}>
+          <ScrollView style={{ width: "100%" }}>
+            <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
+              <Text style={styles.modalTitle}>Registration</Text>
+              <TextInput
+                style={styles.formTextInput}
+                placeholder={"School Name"}
+                onChangeText={text => {
+                  this.setState({
+                    schoolName: text
+                  });
+                }}
+              />
+             
+              <TextInput
+                style={styles.formTextInput}
+                placeholder={"Address"}
+                multiline={true}
+                onChangeText={text => {
+                  this.setState({
+                    address: text
+                  });
+                }}
+              />
+              <TextInput
+                style={styles.formTextInput}
+                placeholder={"Email"}
+                keyboardType={"email-address"}
+                onChangeText={text => {
+                  this.setState({
+                    emailId: text
+                  });
+                }}
+              />
+
+<TextInput
+                style={styles.formTextInput}
+                placeholder={"number of teachers"}
+                onChangeText={text => {
+                  this.setState({
+                    NoOfTeachers: text
+                  });
+                }}
+              />
+              <TextInput
+                style={styles.formTextInput}
+                placeholder={"number of students"}
+                onChangeText={text => {
+                  this.setState({
+                    NoOfStudents: text
+                  });
+                }}
+              />
+              <TextInput
+                style={styles.formTextInput}
+                placeholder={"Password"}
+                secureTextEntry={true}
+                onChangeText={text => {
+                  this.setState({
+                    password: text
+                  });
+                }}
+              />
+              <TextInput
+                style={styles.formTextInput}
+                placeholder={"Confrim Password"}
+                secureTextEntry={true}
+                onChangeText={text => {
+                  this.setState({
+                    confirmPassword: text
+                  });
+                }}
+              />
+              <View style={styles.modalBackButton}>
+                <TouchableOpacity
+                  style={styles.registerButton}
+                  onPress={() =>
+                    this.userSignUp(
+                      this.state.emailId,
+                      this.state.password,
+                      this.state.confirmPassword
+                    )
+                  }
+                >
+                  <Text style={styles.registerButtonText}>Register</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modalBackButton}>
+                <TouchableOpacity
+                  style={styles.cancelButton}
+                  onPress={() => this.setState({ isModalVisible: false })}
+                >
+                  <Text style={{ color: "#ff5722" }}>Cancel</Text>
+                </TouchableOpacity>
+              </View>
+            </KeyboardAvoidingView>
+          </ScrollView>
+        </View>
+      </Modal>
+    );
+  };
+
   render() {
     return (
       <View style={styles.container}>
+        {this.showModal()}
+        
         <SafeAreaProvider>
           <Header
             centerComponent={
@@ -52,9 +207,6 @@ export default class SchoolLoginScreen extends React.Component {
               <Icon
                 type="font-awesome"
                 name="university"
-                onPress={() => {
-                  this.props.navigation.navigate('SchoolHomeScreen');
-                }}
               />
             }
             containerStyle={{
@@ -66,14 +218,6 @@ export default class SchoolLoginScreen extends React.Component {
         </SafeAreaProvider>
         <View></View>
         <View>
-        <TextInput
-            style={styles.loginBox}
-            placeholder="school name"
-            onChangeText={(school) => {
-              this.setState({ schoolName: school });
-            }}
-          />
-
           <TextInput
             style={styles.loginBox}
             keyboardType="email-address"
@@ -100,53 +244,130 @@ export default class SchoolLoginScreen extends React.Component {
             }}>
             <Text>Login</Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => this.setState({ isModalVisible: true })}
+          >
+            <Text>SignUp</Text>
+          </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    margin: 'center',
     flex: 1,
     backgroundColor: '#1ef5fc',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center"
   },
-
-  loginBox: {
-    width: '80%',
-    height: 40,
-    borderBottomWidth: 1.5,
-    borderColor: '#6d9ade',
-    fontSize: 20,
-    margin: 10,
-    paddingLeft: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+  profileContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   title: {
     fontSize: 65,
-    fontWeight: '300',
+    fontWeight: "300",
     paddingBottom: 30,
-    color: 'white',
+    color: "#ff3d00"
   },
-  button: {
-    width: 200,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+  loginBox: {
+    width: 300,
+    height: 40,
+    borderBottomWidth: 1.5,
+    borderColor: "#ff8a65",
+    fontSize: 20,
+    margin: 10,
+    paddingLeft: 10
+  },
+  KeyboardAvoidingView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  modalTitle: {
+    justifyContent: "center",
+    alignSelf: "center",
+    fontSize: 30,
+    color: "#ff5722",
+    margin: 50
+  },
+  modalContainer: {
+    flex: 1,
     borderRadius: 20,
-    backgroundColor: '#a7d1a1',
-    shadowColor: '#000',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: '#1ef5fc',
+    marginRight: 30,
+    marginLeft: 30,
+    marginTop: 80,
+    marginBottom: 80
+  },
+  formTextInput: {
+    width: "75%",
+    height: 35,
+    alignSelf: "center",
+    borderColor: "#ffab91",
+    borderRadius: 10,
+    borderWidth: 1,
+    marginTop: 20,
+    padding: 10
+  },
+  registerButton: {
+    width: 200,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderRadius: 10,
+    marginTop: 30
+  },
+  registerButtonText: {
+    color: "#ff5722",
+    fontSize: 15,
+    fontWeight: "bold"
+  },
+  cancelButton: {
+    width: 200,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 5
+  },
+
+  button: {
+    width: "80%",
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+    backgroundColor: "white",
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 8,
+      height: 8
     },
     shadowOpacity: 0.3,
     shadowRadius: 10.32,
     elevation: 16,
-    padding: 20,
+    padding: 10
   },
+  buttonText: {
+    color: "#ffff",
+    fontWeight: "200",
+    fontSize: 20
+  },
+  santaImage: {
+    width: "70%",
+    height: "100%",
+    resizeMode: "stretch"
+  },
+  bookImage: {
+    width: "100%",
+  }
 });
+

@@ -26,12 +26,14 @@ import GiveSchoolNotifications from "./schoolScreens/GiveSchoolNotifications";
 import SchoolHomeScreen from "./schoolScreens/SchoolHomeScreen";
 import CreateStudentAccount from "./schoolScreens/CreateStudentAccount";
 import CreateTeacherAccount from "./schoolScreens/CreateTeacherAccount"
-import SchoolLoginScreen from "./schoolScreens/SchoolLoginScreen"
+import SchoolLoginScreen from "./schoolScreens/SchoolLoginScreen";
+import EditAboutPage from "./schoolScreens/EditAboutPage";
 //forms
 import NotificationForm from "./Forms/NotificationForm";
 import ProgressForm from "./Forms/ProgressForm";
 import HomeworkForm from "./Forms/HomeworkForm";
-import SchoolNotificationForm from "./Forms/SchoolNotificationForm"
+import SchoolNotificationForm from "./Forms/SchoolNotificationForm";
+import AboutForm from "./Forms/AboutForm";
 //details
 import getAssignmentsDetails from "./Details/GetAssignmentDetails"
 import GetProgressDetails from "./Details/GetProgressDetails";
@@ -87,11 +89,13 @@ const AppDrawerNavigator = createDrawerNavigator({
    SchoolHomeScreen:{screen:SchoolHomeScreen},
    CreateStudentAccount:{screen:CreateStudentAccount},
    CreateTeacherAccount:{screen:CreateTeacherAccount},
+   EditAboutPage:{screen:EditAboutPage},
    //forms
    HomeworkForm:{screen:HomeworkForm},
    ProgressForm:{screen:ProgressForm},
    NotificationForm:{screen:NotificationForm},
    SchoolNotificationForm:{screen:SchoolNotificationForm},
+   AboutSchoolForm:{screen:AboutForm},
    //details
    GetAssignmentsDetails:{screen:getAssignmentsDetails},
    GetProgressDetails:{screen:GetProgressDetails},

@@ -26,7 +26,7 @@ export default class GetProgressDetails extends React.Component{
     this.getProgressList()
     //console.log(this.state.ProgressList);
   }
-  
+  keyExtractor = (item, index) => index.toString()
   componentWillUnmount(){
     this.ProgressRef();
   }

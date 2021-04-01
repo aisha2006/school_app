@@ -16,6 +16,7 @@ export default class NotificationsScreen extends React.Component {
     super();
     this.state = {
       notificationList: [],
+      status:""
     };
     this.notificationRef = null;
   }
@@ -24,14 +25,21 @@ export default class NotificationsScreen extends React.Component {
     this.notificationRef = db
       .collection('Notifications')
       .where('status', '==', 'unread')
-      .onSnapshot((doc) => {
-        var notifications = [];
-        doc.docs.map((data) => {
+      .onSnapshot((doc)=>{
+       doc.docs.map((data) => {
           var notification = data.data();
-          notifications.push(notification);
+          db.collection('Students')
+      .where('class', '==', notification.forClass)
+      .onSnapshot(()=>{
+       doc.docs.map((data) => {
+          var notifications = [];
+          var notification = data.data();
+           notifications.push(notification);
+           this.setState({ notificationList: notifications });
         });
-        this.setState({ notificationList: notifications });
-      });
+      })
+        });
+      })
   };
 
   componentDidMount() {
@@ -70,6 +78,7 @@ export default class NotificationsScreen extends React.Component {
             onPress={
               ()=>{
                 this.props.navigation.navigate("GetNotificationDetails")
+                this.setState({status:"read"});
               }
             }>
           <Text>View</Text>

@@ -5,24 +5,17 @@ import db from '../config';
 import {Header,Icon} from "react-native-elements";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 
-export default class HomeworkForm extends React.Component{
+export default class AboutForm extends React.Component{
     constructor(){
         super();
         this.state={
-            topic:"",
-            instructions:"",
-            submisson_date:"",
-            forClass:"",
+            description:"",
         }
     }
 
-    createUniqueId(){
-    return Math.random().toString(36).substring(7);
-  }
-
-    addAssignments=()=>{
+    updateInformation=()=>{
         var uniqueId = this.createUniqueId()
-        db.collection("Assignments").add({
+        db.collection("Assignments").update({
             "topic":this.state.topic,
             "instructions":this.state.instructions,
             "submissionDate":this.state.submisson_date,

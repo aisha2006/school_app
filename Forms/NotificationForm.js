@@ -11,7 +11,8 @@ export default class NotificationForm extends React.Component{
         this.state={
             title:"",
             message:"",
-            status:"unread"
+            status:"unread",
+            class:''
         }
     }
 
@@ -21,6 +22,7 @@ export default class NotificationForm extends React.Component{
             "message":this.state.message,
             "date": firebase.firestore.FieldValue.serverTimestamp(),
             "status":this.state.status,
+            "forClass":this.state.class
         })
     }
     render(){
@@ -73,13 +75,23 @@ export default class NotificationForm extends React.Component{
                     })
                 }}
                 />
-                
+
+                <TextInput
+                placeholder="for class"
+                maxLength={2}
+                onChangeText={(title)=>{
+                    this.setState({
+                        class:title
+                    })
+                }}
+                />
                 <TouchableOpacity onPress={()=>{
                     this.addNotifications();
                     this.setState({
                        title:"",
                        message:"",
-                       status:"unread"
+                       status:"unread",
+                       class:''
                     })
                     }}>
                     <Text>submit</Text>

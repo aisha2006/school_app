@@ -22,7 +22,7 @@ export default class GetAssignmentDetails extends React.Component{
       });
     })
   }
-
+  keyExtractor = (item, index) => index.toString()
   componentDidMount(){
     this.getAssignmentDetails()
     //console.log(this.state.assignmentsList);
