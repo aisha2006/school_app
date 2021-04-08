@@ -3,20 +3,77 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppDrawerNavigator } from '../components/AppDrawerNavigator';
+import firebase from "firebase";
+import db from "../config"
+import { FlatList } from 'react-native-gesture-handler';
 
 export default class SchoolHomeScreen extends React.Component {
+  constructor(){
+    super();
+    this.state={
+      schoolDetails:[],
+      schoolId:firebase.auth().currentUser.email,
+      schoolName:""
+    }
+    this.schoolRef = null;
+  }
+//   getUserDetails=()=>{
+//     var email = firebase.auth().currentUser.email;
+//     db.collection("Schools").where("Email","==",email).get()
+//     .then((snapshot)=>{
+//         snapshot.forEach((doc)=>{
+//             var data = doc.data();
+//             this.setState({
+//                 schoolName:       data.Name,
+//             })
+//         })
+//     })
+// }
+
+// getUserProfile(){
+//   db.collection("Schools")
+//     .where("Email", "==", this.state.userId)
+//     .onSnapshot((querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+//         this.setState({
+//           schoolName: doc.data().Name,
+         
+//         });
+//       });
+//     });
+// }
+
+ componentDidMount(){
+    // this.getUserDetails();
+    // this.getUserProfile();
+    console.log(this.state.schoolName)
+  }
+
+  // componentWillUnmount(){
+  //   this.schoolRef()
+  // }
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({ item, i }) => {
+    return (
+      <View>
+        <Text>{item.Name}</Text>
+      </View>
+    );
+  };
+
+ 
   render() {
     return (
       <View style={styles.container}>
         <SafeAreaProvider>
           <Header
             leftComponent={
-              <Icon name="user" type="font-awesome" color="#696969" size={25} />
+              <Icon name="user" type="font-awesome" color="#696969" size={25} onPress={()=>{this.props.navigation.navigate("SchoolSideBar")}}/>
             }
-            centerComponent={{
-              text: 'Home Screen',
-              style: { color: '#90A5A9', fontSize: 20, fontWeight: 'bold' },
-            }}
+            centerComponent={
+              <Text style={styles.title}>"Home Screen"</Text>
+            }
             rightComponent={
               <Icon name="bell" type="font-awesome" color="#696969" size={25} />
             }
@@ -27,8 +84,17 @@ export default class SchoolHomeScreen extends React.Component {
             }}
           />
         </SafeAreaProvider>
+       
 
         <View>
+          <View>
+             <FlatList
+           keyExtractor={this.keyExtractor}
+           data={this.state.schoolDetails}
+           renderItem={this.renderItem}
+           />
+          </View>
+          
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -49,6 +115,13 @@ export default class SchoolHomeScreen extends React.Component {
               this.props.navigation.navigate('CreateStudentAccount');
             }}>
             <Text>Create Student Account</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              this.props.navigation.navigate('CreateSchoolAccount');
+            }}>
+            <Text>Create School Account</Text>
           </TouchableOpacity>
         </View>
       </View>

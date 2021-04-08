@@ -30,6 +30,7 @@ export default class CreateStudentAccount extends Component {
       dateOfAttendance: '',
       section: '',
       class: '',
+      schoolEmail:firebase.auth().currentUser.email
     };
   }
 
@@ -49,9 +50,10 @@ export default class CreateStudentAccount extends Component {
             present: this.state.isPresent,
             class: this.state.class,
             dateOfAttendance: this.state.dateOfAttendance,
-            dob: this.state.address,
+            dob: this.state.dob,
             image: this.state.image,
             section: this.state.section,
+            schoolEmail: this.state.schoolEmail,
           });
           return Alert.alert('User Added Successfully', '', [
             {

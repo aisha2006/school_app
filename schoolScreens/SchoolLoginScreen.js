@@ -200,13 +200,17 @@ export default class SchoolLoginScreen extends React.Component {
             centerComponent={
               <Text
                 style={{ fontSize: 30, color: '#ec9706', fontStyle: 'italic' }}>
-                Welcome Screen
+                Inacademy
               </Text>
             }
+
             leftComponent={
               <Icon
+                name="long-arrow-left"
                 type="font-awesome"
-                name="university"
+                onPress={() => {
+                  this.props.navigation.navigate('WelcomeScreen');
+                }}
               />
             }
             containerStyle={{
@@ -216,7 +220,7 @@ export default class SchoolLoginScreen extends React.Component {
             }}
           />
         </SafeAreaProvider>
-        <View></View>
+        <View><Text style={styles.title}>School Login Screen</Text></View>
         <View>
           <TextInput
             style={styles.loginBox}

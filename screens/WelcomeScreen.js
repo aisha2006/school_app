@@ -8,67 +8,30 @@ import {
   Alert,
   Image,
 } from 'react-native';
+import { Avatar } from "react-native-elements";
 import firebase from 'firebase';
 import db from '../config';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Header, Icon } from 'react-native-elements';
 
 export default class WelcomeScreen extends React.Component {
-  constructor() {
+  constructor(){
     super();
-    this.state = {
-      emailId: '',
-      password: '',
-    };
+    this.state={
+      image:require("../assets/school.jpg")
+    }
   }
-
-  userLogin = (email, password) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.props.navigation.navigate('HomeScreen');
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        return Alert.alert(errorMessage);
-      });
-  };
-
-  TeacherLogin = (email, password) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.props.navigation.navigate('TeacherHomeScreen');
-      })
-      .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        return Alert.alert(errorMessage);
-      });
-  };
-
   render() {
     return (
       <View style={styles.container}>
+        <View style={{marginBottom:10}}>
         <SafeAreaProvider>
           <Header
             centerComponent={
               <Text
-                style={{ fontSize: 30, color: '#ec9706', fontStyle: 'italic' }}>
-                Welcome Screen
+                style={{ fontSize: 50, color: '#ec9706', fontStyle: 'italic',marginBottom:10 }}>
+                Inacademy
               </Text>
-            }
-            leftComponent={
-              <Icon
-                type="font-awesome"
-                name="university"
-                onPress={() => {
-                  this.props.navigation.navigate('SchoolLoginScreen');
-                }}
-              />
             }
             containerStyle={{
               width: 1250,
@@ -77,63 +40,19 @@ export default class WelcomeScreen extends React.Component {
             }}
           />
         </SafeAreaProvider>
-        <View></View>
-        <View>
-          <TextInput
-            style={styles.loginBox}
-            keyboardType="email-address"
-            placeholder="abc@mail.com"
-            onChangeText={(email) => {
-              this.setState({ emailId: email });
-            }}
-          />
-
-          <TextInput
-            style={styles.loginBox}
-            secureTextEntry={true}
-            placeholder="enter password"
-            placeholderTextColor="gray"
-            onChangeText={(password) => {
-              this.setState({ password: password });
-            }}
-          />
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.userLogin(this.state.emailId, this.state.password);
-            }}>
-            <Text> student Login</Text>
-          </TouchableOpacity>
         </View>
-
         <View>
-          <TextInput
-            style={styles.loginBox}
-            keyboardType="email-address"
-            placeholder="abc@mail.com"
-            onChangeText={(email) => {
-              this.setState({ emailId: email });
+        <Avatar
+        rounded
+            source={{
+              uri: this.state.image,
             }}
-          />
-
-          <TextInput
-            style={styles.loginBox}
-            secureTextEntry={true}
-            placeholder="enter password"
-            placeholderTextColor="gray"
-            onChangeText={(password) => {
-              this.setState({ password: password });
-            }}
-          />
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              this.TeacherLogin(this.state.emailId, this.state.password);
-            }}>
-            <Text> teacher Login</Text>
-          </TouchableOpacity>
+            size={"xlarge"}
+          /> 
+          <Text style={styles.introText}>I am a/from</Text>
+          <TouchableOpacity onPress={()=>{this.props.navigation.navigate('StudentLoginScreen')}} style={styles.loginBox}><Text>Student</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>{this.props.navigation.navigate('TeacherLoginScreen')}} style={styles.loginBox}><Text>Teacher</Text></TouchableOpacity>
+          <TouchableOpacity onPress={()=>{this.props.navigation.navigate('SchoolLoginScreen')}} style={styles.loginBox}><Text>School Authority</Text></TouchableOpacity>
         </View>
       </View>
     );
@@ -148,6 +67,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
 
   loginBox: {
     width: '80%',
@@ -183,4 +103,9 @@ const styles = StyleSheet.create({
     elevation: 16,
     padding: 20,
   },
+  introText:{
+    marginTop:50,
+  fontFamily:"italic",
+  fontSize:30
+  }
 });

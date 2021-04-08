@@ -16,12 +16,13 @@ export default class ProgressScreen extends React.Component {
   constructor() {
     super();
     this.state = {
+      userId:firebase.auth().currentUser.email,
       progressList: [],
     };
     this.progressRef = null;
   }
   getProgressList = () => {
-    this.ProgressRef = db.collection('Progress').onSnapshot((snapshot) => {
+    this.ProgressRef = db.collection('Progress').where("email","==",this.state.userId).onSnapshot((snapshot) => {
       var progressList = snapshot.docs.map((doc) => doc.data());
       this.setState({
         progressList: progressList,

@@ -13,32 +13,36 @@ import { Header, Icon } from 'react-native-elements';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default class AssignmentScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      class:'',
+      userId:firebase.auth().currentUser.email,
+      // studentClass:firebase.auth().currentUser.email,
       assignmentsList: [],
     };
     this.assignmentRef = null;
   }
 
+  getUserDetails=()=>{
+    var email=firebase.auth().currentUser.email
+    db.collection("Students").where("email","==",email).get()
+    .then((snapshot)=>{
+        snapshot.forEach((doc)=>{
+            var data = doc.data();
+            this.setState({
+                 class:data.class
+            })
+        })
+    })
+}
   getAssignmentsList = () => {
-    this.assignmentRef = db
-    .collection('Assignments')
-    .onSnapshot((doc)=>{
-     doc.docs.map((data) => {
-        var assignment = data.data();
-        db.collection('Students')
-    .where('class', '==', assignment.forClass)
-    .onSnapshot(()=>{
-     doc.docs.map((data) => {
-        var assignments = [];
-        var assignment = data.data();
-         assignments.push(assignment);
-         this.setState({ assignmentsList: assignments });
+    this.assignmentRef = db.collection('Assignments').where("forClass","==",this.state.class).onSnapshot((snapshot) => {
+      var assignmentsList = snapshot.docs.map((doc) => doc.data());
+      this.setState({
+        assignmentsList: assignmentsList,
       });
-    })
-      });
-    })
+    });
   };
 
   componentDidMount() {

@@ -14,7 +14,7 @@ import {
 import db from '../config';
 import firebase from 'firebase';
 
-export default class CreateTeacherAccount extends Component {
+export default class CreateStudentAccount extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,11 +22,11 @@ export default class CreateTeacherAccount extends Component {
       password: '',
       name: '',
       address: '',
-      contact: '',
       confirmPassword: '',
-      image: require('../assets/user.png'),
-      dob: '',
-      schoolEmail: firebase.auth().currentUser.email,
+      image: require("../assets/user.png"),
+      NoOfTeachers:"",
+      NoOfStudents:"",
+      Description:""
     };
   }
 
@@ -38,14 +38,14 @@ export default class CreateTeacherAccount extends Component {
         .auth()
         .createUserWithEmailAndPassword(emailId, password)
         .then(() => {
-          db.collection('Teachers').add({
-            name: this.state.name,
-            contact: this.state.contact,
-            email: this.state.emailId,
-            address: this.state.address,
-            dob: this.state.address,
+          db.collection("Schools").add({
+            Name: this.state.name,
+            Email: this.state.emailId,
+            Location: this.state.address,
             image: this.state.image,
-            schoolEmail: this.state.schoolEmail,
+            NoOfStudents:this.state.NoOfStudents,
+            NoOfTeachers:this.state.NoOfTeachers,
+            Description:this.state.Description
           });
           return Alert.alert('User Added Successfully', '', [
             {
@@ -71,7 +71,7 @@ export default class CreateTeacherAccount extends Component {
         <View style={styles.modalContainer}>
           <ScrollView style={{ width: '100%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              <Text style={styles.modalTitle}> Teacher Registration</Text>
+              <Text style={styles.modalTitle}> Student Registration</Text>
               <TextInput
                 style={styles.formTextInput}
                 placeholder={'name'}
@@ -81,15 +81,36 @@ export default class CreateTeacherAccount extends Component {
                   });
                 }}
               />
+               <TextInput
+                style={styles.formTextInput}
+                placeholder={'Description'}
+                multiline={true}
+                onChangeText={(text) => {
+                  this.setState({
+                    Description: text,
+                  });
+                }}
+              />
 
               <TextInput
                 style={styles.formTextInput}
-                placeholder={'Contact'}
-                maxLength={10}
+                placeholder={'No of teachers'}
+                maxLength={5}
                 keyboardType={'numeric'}
                 onChangeText={(text) => {
                   this.setState({
-                    contact: text,
+                    NoOfTeachers: text,
+                  });
+                }}
+              />
+              <TextInput
+                style={styles.formTextInput}
+                placeholder={'No of students'}
+                maxLength={5}
+                keyboardType={'numeric'}
+                onChangeText={(text) => {
+                  this.setState({
+                    NoOfStudents: text,
                   });
                 }}
               />
@@ -134,26 +155,20 @@ export default class CreateTeacherAccount extends Component {
                 }}
               />
 
-              <TextInput
-                style={styles.formTextInput}
-                placeholder={'dob'}
-                onChangeText={(text) => {
-                  this.setState({
-                    dob: text,
-                  });
-                }}
-              />
-
               <View style={styles.modalBackButton}>
                 <TouchableOpacity
                   style={styles.registerButton}
-                  onPress={() => {
-                    this.userSignUp(
+                  
+                  onPress={() =>
+                   {
+                      this.userSignUp(
                       this.state.emailId,
                       this.state.password,
                       this.state.confirmPassword
                     );
-                  }}>
+                    this.setState({schoolEmail:firebase.auth().currentUser.email})
+                    this.props.navigation.navigate('SchoolHomeScreen');}
+                  }>
                   <Text style={styles.registerButtonText}>Register</Text>
                 </TouchableOpacity>
               </View>
@@ -168,7 +183,7 @@ export default class CreateTeacherAccount extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '##1ef5fc5',
+    backgroundColor: '#1ef5fc5',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -191,7 +206,7 @@ const styles = StyleSheet.create({
     borderColor:"black",
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1ef5fc',
+    backgroundColor: '#1ef5fc5',
     marginRight: 30,
     marginLeft: 30,
     marginTop: 80,

@@ -13,6 +13,7 @@ import GiveProgressScreen from "./TeacherScreens/GiveProgressScreen";
 import GiveNotificationScreen from "./TeacherScreens/GiveNotificationScreen";
 import GiveAttendanceScreen from "./TeacherScreens/GiveAttendanceScreen";
 import TeacherProfile from "./TeacherScreens/TeacherProfile";
+import TeacherLoginScreen from "./TeacherScreens/TeacherLoginScreen";
 //student screens
 import HomeScreen from "./screens/HomeScreen"
 import AssignmentsScreen from "./screens/AssignmentsScreens";
@@ -21,6 +22,7 @@ import ProgressScreen from "./screens/ProgressScreen";
 import NotificationsScreen from "./screens/NotificationsScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import AboutPage from "./screens/AboutPage";
+import StudentLoginScreen from "./screens/StudentLoginScreen";
 //school screens
 import GiveSchoolNotifications from "./schoolScreens/GiveSchoolNotifications";
 import SchoolHomeScreen from "./schoolScreens/SchoolHomeScreen";
@@ -28,6 +30,8 @@ import CreateStudentAccount from "./schoolScreens/CreateStudentAccount";
 import CreateTeacherAccount from "./schoolScreens/CreateTeacherAccount"
 import SchoolLoginScreen from "./schoolScreens/SchoolLoginScreen";
 import EditAboutPage from "./schoolScreens/EditAboutPage";
+import SchoolSideBar from "./components/SchoolSideBar";
+import CreateSchoolAccount from "./schoolScreens/CreateSchoolAccount";
 //forms
 import NotificationForm from "./Forms/NotificationForm";
 import ProgressForm from "./Forms/ProgressForm";
@@ -76,6 +80,7 @@ const AppDrawerNavigator = createDrawerNavigator({
    SettingsScreen: {screen: SettingsScreen},
    AttendanceScreen: {screen: AttendanceScreen},
    About: {screen:AboutPage},
+   StudentLoginScreen:{screen:StudentLoginScreen},
    //teacher screens
    TeacherHomeScreen:{screen:TeacherHomeScreen},
    GiveAssignments:{screen:GiveAssignmentsScreen},
@@ -83,13 +88,16 @@ const AppDrawerNavigator = createDrawerNavigator({
    GiveProgress:{screen:GiveProgressScreen},
    GiveAttendance:{screen:GiveAttendanceScreen},
    TeacherProfile:{screen:TeacherProfile},
+   TeacherLoginScreen:{screen:TeacherLoginScreen},
    //school screens
    SchoolLoginScreen:{screen:SchoolLoginScreen},
    GiveSchoolNotifications:{screen:GiveSchoolNotifications},
    SchoolHomeScreen:{screen:SchoolHomeScreen},
    CreateStudentAccount:{screen:CreateStudentAccount},
    CreateTeacherAccount:{screen:CreateTeacherAccount},
+   CreateSchoolAccount:{screen:CreateSchoolAccount},
    EditAboutPage:{screen:EditAboutPage},
+   SchoolSideBar:{screen:SchoolSideBar},
    //forms
    HomeworkForm:{screen:HomeworkForm},
    ProgressForm:{screen:ProgressForm},
