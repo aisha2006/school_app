@@ -69,28 +69,27 @@ export default class TeacherHomeScreen extends React.Component{
 }
 
 const styles = StyleSheet.create({
-    container: {
-        margin:"center",
-        flex: 1,
-        backgroundColor: '#1ef5fc',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      title: {
-        fontSize: 65,
-        fontWeight: "300",
-        paddingBottom: 30,
-        color: "white",
-        
-      },
+  container: {
+    margin: 'center',
+    flex: 1,
+    backgroundColor: '#1ef5fc',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 65,
+    fontWeight: '300',
+    paddingBottom: 30,
+    color: 'white',
+  },
 
-      button:{
-          marginBottom:50,
-          shadowColor:"black",
-          shadowOpacity:50,
-          borderColor:"white",
-          width:1000,
-          borderWidth:25,
-          marginRight:250
-      }
+  button: {
+    justifyContent: 'flex-start',
+    alignContent: 'flex-start',
+    borderWidth: 1,
+    borderColor: 'black',
+    marginBottom: 100,
+    width: 1000,
+    marginRight: 220,
+  },
 });

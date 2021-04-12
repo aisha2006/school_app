@@ -33,6 +33,33 @@ export default class WelcomeScreen extends React.Component {
                 Inacademy
               </Text>
             }
+            leftComponent={
+              <View style={{marginTop:10,marginBottom:10}}>
+                 <Icon  
+  name='sc-facebook'
+  type='evilicon'
+  color='#517fa4'
+/>
+
+<Icon
+name='sc-twitter'
+type='evilicon'
+color='#517fa4'
+/></View>
+             
+            }
+            rightComponent={
+              <View style={{marginTop:10,marginBottom:10}}>
+              <Icon  
+              style={{alignSelf:"center",justifyContent:"center"}}
+name='sc-github'
+type='evilicon'
+color='#517fa4'
+size={50}
+/>
+
+</View>
+            }
             containerStyle={{
               width: 1250,
               height: 50,
@@ -63,7 +90,7 @@ const styles = StyleSheet.create({
   container: {
     margin: 'center',
     flex: 1,
-    backgroundColor: '#1ef5fc',
+    backgroundColor: '#1601A35',
     alignItems: 'center',
     justifyContent: 'center',
   },

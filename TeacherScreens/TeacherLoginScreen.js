@@ -59,7 +59,7 @@ export default class TeacherLoginScreen extends React.Component {
             containerStyle={{
               width: 1250,
               height: 50,
-              backgroundColor: '#1ef5fc',
+              backgroundColor: 'white',
             }}
           
           />

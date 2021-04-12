@@ -13,39 +13,39 @@ export default class SchoolHomeScreen extends React.Component {
     this.state={
       schoolDetails:[],
       schoolId:firebase.auth().currentUser.email,
-      schoolName:""
+      schoolName:"",
+      docId:''
     }
     this.schoolRef = null;
-  }
-//   getUserDetails=()=>{
-//     var email = firebase.auth().currentUser.email;
-//     db.collection("Schools").where("Email","==",email).get()
-//     .then((snapshot)=>{
-//         snapshot.forEach((doc)=>{
-//             var data = doc.data();
-//             this.setState({
-//                 schoolName:       data.Name,
-//             })
-//         })
-//     })
-// }
+  }  
+  getUserDetails=()=>{
+    var email = firebase.auth().currentUser.email;
+    db.collection("Schools").where('Email','==',email).onSnapshot((snapshot)=>{
+        snapshot.forEach((doc)=>{
+            var data = doc.data();
+            this.setState({
+                schoolName:       data.Name,
+                docId: doc.id
+            })
+        })
+    })
+}
 
-// getUserProfile(){
-//   db.collection("Schools")
-//     .where("Email", "==", this.state.userId)
-//     .onSnapshot((querySnapshot) => {
-//       querySnapshot.forEach((doc) => {
-//         this.setState({
-//           schoolName: doc.data().Name,
-         
-//         });
-//       });
-//     });
-// }
+getUserProfile(){
+  db.collection("Schools")
+    .where("Email", "==", this.state.docId)
+    .onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        this.setState({
+          schoolName: doc.data().Name, 
+        });
+      });
+    });
+}
 
  componentDidMount(){
-    // this.getUserDetails();
-    // this.getUserProfile();
+    this.getUserDetails();
+     this.getUserProfile();
     console.log(this.state.schoolName)
   }
 
@@ -72,7 +72,7 @@ export default class SchoolHomeScreen extends React.Component {
               <Icon name="user" type="font-awesome" color="#696969" size={25} onPress={()=>{this.props.navigation.navigate("SchoolSideBar")}}/>
             }
             centerComponent={
-              <Text style={styles.title}>"Home Screen"</Text>
+              <Text style={styles.title}>{this.state.schoolName}</Text>
             }
             rightComponent={
               <Icon name="bell" type="font-awesome" color="#696969" size={25} />

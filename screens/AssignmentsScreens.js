@@ -26,7 +26,7 @@ export default class AssignmentScreen extends React.Component {
 
   getUserDetails=()=>{
     var email=firebase.auth().currentUser.email
-    db.collection("Students").where("email","==",email).get()
+    db.collection("Students").where("email","==","student1@gmail.com").get()
     .then((snapshot)=>{
         snapshot.forEach((doc)=>{
             var data = doc.data();
@@ -46,8 +46,9 @@ export default class AssignmentScreen extends React.Component {
   };
 
   componentDidMount() {
+    this.getUserDetails();
     this.getAssignmentsList();
-    //console.log(this.state.assignmentsList);
+    console.log(this.state.class);
   }
 
   componentWillUnmount() {

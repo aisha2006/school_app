@@ -91,7 +91,7 @@ export default class ProgressScreen extends React.Component {
                   color: 'white',
                   fontStyle: 'italic',
                 }}>
-                Assignments Screen
+                Progress Screen
               </Text>
             }
             leftComponent={
@@ -128,9 +128,6 @@ export default class ProgressScreen extends React.Component {
                 data={this.state.progressList}
                 renderItem={this.renderItem}
               />
-              <View>
-                <Text>test</Text>
-              </View>
             </View>
           )}
         </View>

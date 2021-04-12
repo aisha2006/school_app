@@ -11,6 +11,7 @@ export default class HomeScreen extends React.Component {
     super();
     this.state = {
       userId: firebase.auth().currentUser.email,
+      schoolName:""
     };
   }
 

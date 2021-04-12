@@ -15,7 +15,8 @@ export default class ProgressForm extends React.Component{
             marks:"",
             percentage:"",
             remarks:"",
-            subject:""
+            subject:"",
+            email:''
         }
     }
 
@@ -27,7 +28,8 @@ export default class ProgressForm extends React.Component{
             marks:this.state.marks,
             percentage:this.state.percentage,
             remarks:this.state.remarks,
-            subject:this.state.subject
+            subject:this.state.subject,
+            email:this.state.email
         })
     }
     render(){
@@ -123,6 +125,14 @@ export default class ProgressForm extends React.Component{
                 onChangeText={(remarks)=>{
                     this.setState({
                         remarks:remarks
+                    })
+                }}
+                />
+                <TextInput
+                placeholder="email"
+                onChangeText={(email)=>{
+                    this.setState({
+                        email:email
                     })
                 }}
                 />
